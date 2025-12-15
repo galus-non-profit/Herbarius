@@ -6,7 +6,13 @@
   <Folder Name="/src/Domain/">
     <Project Path="src/Domain/Herbarius.Domain.csproj" />
   </Folder>
+  <Folder Name="/src/Infrastructure/">
+    <Project Path="src/Infrastructure/Herbarius.Infrastructure.csproj" />
+  </Folder>
   <Folder Name="/tests/" />
+  <Folder Name="/tests/Application.FunctionalTests/">
+    <Project Path="tests/Application.FunctionalTests/Herbarius.Application.FunctionalTests.csproj" />
+  </Folder>
   <Folder Name="/tests/Application.UnitTests/">
     <Project Path="tests/Application.UnitTests/Herbarius.Application.UnitTests.csproj" />
   </Folder>
