@@ -17,7 +17,8 @@ public sealed class CreateDocumentTests : TestBase
             Id = new DocumentId(Guid.NewGuid()),
             Name = "testowa",
         }
-      ;
+        ;
+
         var mediator = this.Provider.GetRequiredService<IMediator>();
         await mediator.Send(command);
 

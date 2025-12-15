@@ -35,4 +35,3 @@ internal sealed class DocumentRepository : IDocumentRepository
         entities[entity.Id] = entity;
     }
 }
-
