@@ -53,6 +53,7 @@ git push
 dotnet new classlib --framework net10.0 --output src/Infrastructure --name Herbarius.Infrastructure
 dotnet sln add src/Infrastructure
 dotnet add src/Infrastructure reference src/Application
+```
 
 ```powershell
 dotnet new mstest --framework net10.0 --output tests/Application.FunctionalTests --name Herbarius.Application.FunctionalTests
@@ -60,4 +61,8 @@ dotnet sln add tests/Application.FunctionalTests
 dotnet add tests/Application.FunctionalTests reference src/Infrastructure
 dotnet add tests/Application.FunctionalTests package Shouldly
 ```
+
+git add .
+git commit -m "add application functional test"
+git push
 
