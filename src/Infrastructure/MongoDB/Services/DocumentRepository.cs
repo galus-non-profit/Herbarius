@@ -7,21 +7,30 @@ using global::MongoDB.Driver;
 
 internal sealed class DocumentRepository(IMongoDatabase database) : IDocumentRepository
 {
-    public Task<DocumentEntity?> LoadAsync(DocumentId id, CancellationToken cancellationToken = default)
+    private const string COLLECTION_NAME = "Docs";
+
+    public async Task<DocumentEntity?> LoadAsync(DocumentId id, CancellationToken cancellationToken = default)
     {
-        var collection = database.GetCollection<DocumentDbEntity>("Docs");
-        var filter = Builders<DocumentDbEntity>.Filter.Eq("Id", id.Value.ToString());
-        var dbEntity = collection.Find(filter).First();
+        var collection = database.GetCollection<DocumentDbEntity>(COLLECTION_NAME);
+
+        var filter = Builders<DocumentDbEntity>.Filter.Eq("Id", $"{id.Value}");
+        var dbEntity = await collection.Find(filter).FirstOrDefaultAsync();
+
+        if (dbEntity is null)
+        {
+            return default;
+        }
+
         var entity = new DocumentEntity(new DocumentId(dbEntity.Id), dbEntity.Name);
 
-        return Task.FromResult<DocumentEntity?>(entity);
+        return entity;
     }
 
     public async Task SaveAsync(DocumentEntity entity, CancellationToken cancellationToken = default)
     {
-        var collection = database.GetCollection<DocumentDbEntity>("Docs");
+        var collection = database.GetCollection<DocumentDbEntity>(COLLECTION_NAME);
 
-        var filter = Builders<DocumentDbEntity>.Filter.Eq(nameof(entity.Id), entity.Id.Value.ToString());
+        var filter = Builders<DocumentDbEntity>.Filter.Eq(nameof(entity.Id), $"{entity.Id.Value}");
 
         var dbEntity = new DocumentDbEntity
         {
