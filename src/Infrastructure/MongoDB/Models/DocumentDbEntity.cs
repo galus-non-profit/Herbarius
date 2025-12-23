@@ -1,7 +1,7 @@
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-
 namespace Herbarius.Infrastructure.MongoDB.Models;
+
+using global::MongoDB.Bson;
+using global::MongoDB.Bson.Serialization.Attributes;
 
 internal sealed class DocumentDbEntity
 {
