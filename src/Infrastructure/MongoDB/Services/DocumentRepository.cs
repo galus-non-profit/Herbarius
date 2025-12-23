@@ -2,8 +2,8 @@ namespace Herbarius.Infrastructure.MongoDB.Services;
 
 using Herbarius.Domain.Interfaces;
 using Herbarius.Domain.Entities;
-using global::MongoDB.Driver;
 using Herbarius.Infrastructure.MongoDB.Models;
+using global::MongoDB.Driver;
 
 internal sealed class DocumentRepository(IMongoDatabase database) : IDocumentRepository
 {
@@ -21,7 +21,7 @@ internal sealed class DocumentRepository(IMongoDatabase database) : IDocumentRep
     {
         var collection = database.GetCollection<DocumentDbEntity>("Docs");
 
-        var filter = Builders<DocumentDbEntity>.Filter.Eq("Id", entity.Id.Value.ToString());
+        var filter = Builders<DocumentDbEntity>.Filter.Eq(nameof(entity.Id), entity.Id.Value.ToString());
 
         var dbEntity = new DocumentDbEntity
         {
